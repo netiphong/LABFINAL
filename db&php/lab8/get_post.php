@@ -23,7 +23,8 @@
                                     "std_name" => $row['std_name'],
                                     "std_tel" => $row['std_tel'],
                                     "std_email" => $row['std_email'],
-                                    "genae"=>$row['genae']));
+                                    "spinner" => $row['spinner'],
+                                    "gender" => $row['gender']));
         }
         print json_encode(array('result' => $result));
 

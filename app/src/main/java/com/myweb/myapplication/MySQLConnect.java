@@ -39,8 +39,10 @@ public class MySQLConnect {
     public  String std_name ="";
     public  String std_tel ="";
     public  String std_email ="";
+    public  String spinnerr = "";
+    public  String gender = "";
     public  String string ="";
-    public  String genae = "";
+
 
     public MySQLConnect(){ main = null; }
 
@@ -80,7 +82,8 @@ public class MySQLConnect {
         std_name = "";
         std_tel = "";
         std_email = "";
-        genae ="";
+        spinnerr ="";
+        gender ="";
         string = "";
         try{
             JSONObject jsonObject = new JSONObject(response);
@@ -92,15 +95,16 @@ public class MySQLConnect {
                 std_name = collectData.getString("std_name");
                 std_tel = collectData.getString("std_tel");
                 std_email = collectData.getString("std_email");
-                genae =  collectData.getString("genae");
-                string = std_id +"\n"+ std_name + "\n" + std_tel +"\n"+ std_email+"\n"+genae;
+                spinnerr =  collectData.getString("spinner");
+                gender =  collectData.getString("gender");
+                string = std_id +"\n"+ std_name + "\n" + std_tel +"\n"+ std_email+"\n"+spinnerr+"\n"+gender;
                 list.add(string);
             }
 
         }catch (JSONException ex){ex.printStackTrace();}
 
     }
-    public void sentData(String StdId, String StdName, String StdTel,String StdEmail,String genae){
+    public void sentData(String StdId, String StdName, String StdTel,String StdEmail,String spinner,String gender){
         StrictMode.enableDefaults();
         if (Build.VERSION.SDK_INT > 9){
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -109,11 +113,12 @@ public class MySQLConnect {
         try {
             ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("isAdd", "true"));
-            nameValuePairs.add(new BasicNameValuePair("stdid",StdId));
-            nameValuePairs.add(new BasicNameValuePair("stdname",StdName));
-            nameValuePairs.add(new BasicNameValuePair("stdtel",StdTel));
-            nameValuePairs.add(new BasicNameValuePair("stdemail",StdEmail));
-            nameValuePairs.add(new BasicNameValuePair("genae",genae));
+            nameValuePairs.add(new BasicNameValuePair("std_id",StdId));
+            nameValuePairs.add(new BasicNameValuePair("std_name",StdName));
+            nameValuePairs.add(new BasicNameValuePair("std_tel",StdTel));
+            nameValuePairs.add(new BasicNameValuePair("std_email",StdEmail));
+            nameValuePairs.add(new BasicNameValuePair("spinner",spinner));
+            nameValuePairs.add(new BasicNameValuePair("gender",gender));
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(URL + SENT_URL);
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));

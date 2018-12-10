@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,7 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 
 import java.util.List;
@@ -24,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText txtStdName;
     private EditText txtStdTel;
     private EditText txtStdEmail;
-    private EditText genae;
+    String spin;
+    String gender1;
+    RadioGroup genderRadio;
 
     private Button btnSave;
     private Button btnShow;
@@ -45,9 +49,31 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         init();
         update();
+        genderRadio = findViewById(R.id.gendergroup);
+
 
         clickView = findViewById(R.id.dataView);
-        page2 = findViewById(R.id.page2);
+        Spinner deptSpinner = (Spinner) findViewById(R.id.checknumb);
+        //Spinner
+        final String[] deptNameStr = getResources().getStringArray(R.array.deptName_array);
+        ArrayAdapter<String> adapterDept = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, deptNameStr);
+
+        deptSpinner.setAdapter(adapterDept);
+        deptSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent,View view,int position,long id){
+
+                spin = parent.getItemAtPosition(position).toString();
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
+
+        //--------------------------------------------------------
         page2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,16 +102,26 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnSave.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                mySQLConnect.sentData(txtStdid.getText().toString(),txtStdName.getText().toString(),txtStdTel.getText().toString(),txtStdEmail.getText().toString(),genae.getText().toString());
-                items.add(txtStdid.getText().toString()+"\n"+txtStdName.getText().toString()+"\n"+txtStdTel.getText().toString()+"\n"+txtStdEmail.getText().toString()+"\n"+genae.getText().toString());
+                //RadioButton
+                int selectedGender = genderRadio.getCheckedRadioButtonId();
+                if (selectedGender == R.id.ipMale){
+                    gender1 = "Male";}
+                else if (selectedGender == R.id.ipFemale){
+                    gender1 = "Female";
+                    Log.d("Femail: ",gender1);}
+                    //------------------------------------------
+                mySQLConnect.sentData(txtStdid.getText().toString(),txtStdName.getText().toString(),txtStdTel.getText().toString(),txtStdEmail.getText().toString(),spin,gender1);
+                items.add(txtStdid.getText().toString()+"\n"+txtStdName.getText().toString()+"\n"+txtStdTel.getText().toString()+"\n"+txtStdEmail.getText().toString()+"\n"+spin+"\n"+gender1);
                 adt.notifyDataSetChanged();
                 txtStdid.setText("");
                 txtStdName.setText("");
                 txtStdTel.setText("");
                 txtStdEmail.setText("");
-                genae.setText("");
+                spin="";
+
 
             }
         });
@@ -111,11 +147,12 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
     public void init(){
+        page2 = findViewById(R.id.page2);
         txtStdid = (EditText)findViewById(R.id.txtId);
         txtStdName = findViewById(R.id.txtName);
         txtStdTel = findViewById(R.id.txtTel);
         txtStdEmail = findViewById(R.id.txtEmail);
-        genae = findViewById(R.id.genae);
+
         btnSave = (Button)findViewById(R.id.btnSave);
         btnShow = findViewById(R.id.btnShow);
         dataView = (ListView)findViewById(R.id.dataView);

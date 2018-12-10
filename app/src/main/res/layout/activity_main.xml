@@ -6,85 +6,120 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:hint="รหัสนักศึกษา"
-        android:inputType="none"
-        android:id="@+id/txtId"
-        android:layout_marginTop="30dp"/>
-
-    <EditText
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:hint="ชื่อนักศึกษา"
-        android:id="@+id/txtName"
-        android:layout_below="@id/txtId"
-        android:layout_marginTop="0dp"/>
-
-    <EditText
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:hint="เบอร์โทร"
-        android:id="@+id/txtTel"
-        android:layout_below="@id/txtName"
-        android:layout_marginTop="0dp"/>
-
-    <EditText
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:hint="อีเมลล์"
-        android:id="@+id/txtEmail"
-        android:layout_below="@id/txtTel"
-        android:layout_marginTop="0dp"/>
-
-    <EditText
-        android:id="@+id/genae"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtTel"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="44dp"
-        android:hint="อีเมลล์" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/btnSave"
-        android:layout_marginTop="140dp"
-        android:layout_marginBottom="10dp"
-        android:text="SAVE"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/btnShow"
-        android:layout_below="@id/btnSave"
-        android:layout_marginTop="10dp"
-        android:text="show"/>
-
-    <Button
-        android:id="@+id/page2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="182dp"
-        android:text="Page2" />
-
-    <ListView
-        android:id="@+id/dataView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="238dp"
-        android:layout_below="@id/txtEmail"
-        android:layout_marginTop="60dp">
+        android:layout_height="match_parent">
 
-    </ListView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="251dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/txtEmail"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:hint="อีเมลล์" />
+
+                <EditText
+                    android:id="@+id/txtTel"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:hint="เบอร์โทร" />
+
+                <EditText
+                    android:id="@+id/txtId"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:hint="รหัสนักศึกษา"
+                    android:inputType="none" />
+
+                <EditText
+                    android:id="@+id/txtName"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:hint="ชื่อนักศึกษา" />
+
+                <RadioGroup
+                    android:id="@+id/gendergroup"
+                    android:layout_width="185dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/ipMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        android:textSize="20sp" />
+
+                    <RadioButton
+                        android:id="@+id/ipFemale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Female"
+                        android:textSize="20sp" />
+                </RadioGroup>
+
+                <Spinner
+                    android:id="@+id/checknumb"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/txtName"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginBottom="-120dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/page2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Page2" />
+
+                <Button
+                    android:id="@+id/btnShow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btnSave"
+                    android:text="show" />
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SAVE" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ListView
+                    android:id="@+id/dataView"
+                    android:layout_width="match_parent"
+                    android:layout_height="238dp"
+                    android:layout_below="@id/txtEmail"
+                    android:layout_marginTop="60dp">
+
+                </ListView>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 
 </RelativeLayout>
